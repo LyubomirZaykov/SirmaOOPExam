@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExamOOP.Models
 {
-    public class Car : IVehicle, IRentable
+    public abstract class Car : IVehicle, IRentable
     {
         private int id;
         private string make;
