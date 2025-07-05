@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\engineering\\programming\\C#\\SirmaOOPExam\\ExamOOP\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4F2893A0-19F5-45D7-9791-18656BD92720}|ExamOOP\\ExamOOP.csproj|d:\\engineering\\programming\\c#\\sirmaoopexam\\examoop\\examoop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4F2893A0-19F5-45D7-9791-18656BD92720}|ExamOOP\\ExamOOP.csproj|solutionrelative:examoop\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\engineering\\programming\\C#\\SirmaOOPExam\\ExamOOP\\ExamOOP\\Program.cs",
+              "RelativeDocumentMoniker": "ExamOOP\\Program.cs",
+              "ToolTip": "D:\\engineering\\programming\\C#\\SirmaOOPExam\\ExamOOP\\ExamOOP\\Program.cs",
+              "RelativeToolTip": "ExamOOP\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T06:57:17.234Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
