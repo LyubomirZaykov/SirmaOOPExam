@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ExamOOP.Models
 {
-    public class Hatchback
+    public class Hatchback : Car
     {
+        public Hatchback(int id, string make, string model, int year, string type, string availability, string currentRenter) : base(id, make, model, year, type, availability, currentRenter)
+        {
+        }
+        public Hatchback(int id, string make, string model, int year, string type, string availability) : base(id, make, model, year, type, availability)
+        {
+        }
     }
 }

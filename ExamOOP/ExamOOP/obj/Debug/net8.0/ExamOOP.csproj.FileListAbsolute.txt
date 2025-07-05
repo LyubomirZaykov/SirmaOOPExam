@@ -1,0 +1,15 @@
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.GeneratedMSBuildEditorConfig.editorconfig
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.AssemblyInfoInputs.cache
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.AssemblyInfo.cs
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.csproj.CoreCompileInputs.cache
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.sourcelink.json
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\bin\Debug\net8.0\ExamOOP.exe
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\bin\Debug\net8.0\ExamOOP.deps.json
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\bin\Debug\net8.0\ExamOOP.runtimeconfig.json
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\bin\Debug\net8.0\ExamOOP.dll
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\bin\Debug\net8.0\ExamOOP.pdb
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.dll
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\refint\ExamOOP.dll
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.pdb
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ExamOOP.genruntimeconfig.cache
+D:\engineering\programming\C#\SirmaOOPExam\ExamOOP\ExamOOP\obj\Debug\net8.0\ref\ExamOOP.dll

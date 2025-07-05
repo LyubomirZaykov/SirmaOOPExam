@@ -10,6 +10,6 @@ namespace ExamOOP.Interfaces
     {
         string Name { get; }
         int Id { get; }
-        DateOnly DateOfBirth { get; }
+
     }
 }

@@ -13,7 +13,7 @@ namespace ExamOOP.Interfaces
         string Model { get; }
         int Year { get; }
         string Type { get; }
-        bool Availability { get; }
+        string Availability { get;}
         string CurrentRenter { get;}
 
         void DisplayInfo();

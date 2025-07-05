@@ -1,4 +1,6 @@
 ﻿
+using ExamOOP.Models;
+
 namespace ExamOOP.Interfaces
 {
     public  interface ISearchable

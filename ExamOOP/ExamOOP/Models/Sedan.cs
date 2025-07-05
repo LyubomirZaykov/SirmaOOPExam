@@ -8,7 +8,10 @@ namespace ExamOOP.Models
 {
     public class Sedan : Car
     {
-        public Sedan(int id, string make, string model, int year, string type, string status, string currentRenter) : base(id, make, model, year, type, status, currentRenter)
+        public Sedan(int id, string make, string model, int year, string type, string availability, string currentRenter) : base(id, make, model, year, type, availability, currentRenter)
+        {
+        }
+        public Sedan(int id, string make, string model, int year, string type, string availability) : base(id, make, model, year, type, availability)
         {
         }
     }
