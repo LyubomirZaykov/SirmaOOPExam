@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ExamOOP.Models
 {
@@ -17,15 +18,19 @@ namespace ExamOOP.Models
         private int year;
         private string? type;
         private string? availability; // Assuming availability is a string that can be "Available" or "Rented"
+        private string currentRenter; // Assuming CurrentRenter is a string that can be empty if no one has rented the car.
 
-
-        public Car(int id, string make, string model, int year, string type, string availability)
+        public Car(int id, string make, string model, int year, string type, string availability, string currentRenter)
         {
             this.Id = id;
             this.Make = make;
             this.Model = model;
             this.Year = year;
             this.Availability = availability.ToLower();
+            if (currentRenter!=null)
+            {
+                this.CurrentRenter = currentRenter;
+            }
 
         }
         public int Id
@@ -121,7 +126,7 @@ namespace ExamOOP.Models
                 {
                     throw new ArgumentNullException("Make cannot be null or empty.");
                 }
-                else if (value != "rented" || value != "available")
+                else if (value != "rented" && value != "available")
                 {
                     throw new ArgumentNullException("Availability status must be either rented or available.");
 
@@ -154,7 +159,17 @@ namespace ExamOOP.Models
                 }
             }
         }
-
+        public string CurrentRenter
+        {
+            get
+            {
+                return this.currentRenter;
+            }
+            private set
+            {
+                this.currentRenter = value;
+            }
+        } // Assuming CurrentRenter is a string that can be empty if no one has rented the car.
         // Assuming true means available, false means rented out and Initially all cars are available.
         public bool IsRented()
         {
@@ -174,8 +189,12 @@ namespace ExamOOP.Models
 
         }
 
-        public void ChangeAvailability(string availability)
+        public void ChangeAvailability(string availability, string currentRenterName)
         {
+            if (this.availability == "rented")
+            {
+                this.CurrentRenter = currentRenterName;
+            }
             if (string.IsNullOrEmpty(availability) || (availability != "available" && availability != "rented"))
             {
                 throw new ArgumentException("Availability must be either 'available' or 'rented'.");
@@ -190,6 +209,6 @@ namespace ExamOOP.Models
             this.Type = type;
             this.Availability = availability.ToLower();
         }
-        
+
     }
 }

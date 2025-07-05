@@ -1,19 +1,19 @@
-﻿
-using ExamOOP.Interfaces;
+﻿using ExamOOP.Interfaces;
+using ExamOOP.Models;
 
-namespace ExamOOP.Models
+namespace ExamOOP.Services
 {
-    public class RentalManager : IRentable
+    public class RentalManager : IRentable, ISearchable
     {
         private List<IVehicle> cars;
         private List<ICustomer> customers;
         private List<IRental> rentals;
 
-        public RentalManager()
+        public RentalManager(List<IVehicle> vehicles)
         {
-            this.cars = new List<IVehicle>();
-            this.customers = new List<ICustomer>();
-            this.rentals = new List<IRental>();
+            this.cars = vehicles;
+            customers = new List<ICustomer>();
+            rentals = new List<IRental>();
         }
         public void AddCar(IVehicle car)
         {
@@ -21,7 +21,7 @@ namespace ExamOOP.Models
             {
                 throw new ArgumentNullException(nameof(car), "Car cannot be null.");
             }
-            this.cars.Add(car);
+            cars.Add(car);
         }
         public void AddCustomer(ICustomer customer)
         {
@@ -29,11 +29,11 @@ namespace ExamOOP.Models
             {
                 throw new ArgumentNullException(nameof(customer), "Customer cannot be null.");
             }
-            this.customers.Add(customer);
+            customers.Add(customer);
         }
         public void EditCar(IVehicle car)
         {
-            IVehicle? currCar = this.cars.FirstOrDefault(c => c.Id == car.Id);
+            IVehicle? currCar = cars.FirstOrDefault(c => c.Id == car.Id);
             if (currCar == null)
             {
                 throw new ArgumentException("Car not found.");
@@ -54,22 +54,18 @@ namespace ExamOOP.Models
             currCar.ActualizeCar(make, model, year, type, availability);
 
         }
-        public void ListCars()
+        public List<IVehicle> ListCars()
         {
-            if (this.cars.Count == 0)
+            if (cars.Count == 0)
             {
-                Console.WriteLine("No cars available.");
-                return;
+                Console.WriteLine("No cars available."); 
             }
-            foreach (var car in this.cars)
-            {
-                car.DisplayInfo();
-            }
+            return cars;
         }
         public void RentCar(string customer,int carId)
         {
             Console.WriteLine("Please enter the ID of the car you want to rent:");
-            IVehicle? car = this.cars.FirstOrDefault(c => c.Id == carId);
+            IVehicle? car = cars.FirstOrDefault(c => c.Id == carId);
             if (car == null)
             {
                 Console.WriteLine("Car not found.");
@@ -84,7 +80,7 @@ namespace ExamOOP.Models
             }
             Console.WriteLine("Please enter your name:");
           
-            ICustomer? currCustomer = this.customers.FirstOrDefault(c => c.Name == customer);
+            ICustomer? currCustomer = customers.FirstOrDefault(c => c.Name == customer);
             if (customer == null)
             {
                 Console.WriteLine("Customer not found. Please register first.");
@@ -100,34 +96,67 @@ namespace ExamOOP.Models
             IRental rental= new Rental(car, currCustomer,rentalDate,returnDate);
             rentals.Add(rental);
             Console.WriteLine($"Car {car.Make} {car.Model} rented to {currCustomer.Name}.");
-            car.ChangeAvailability("rented"); // Mark the car as rented
+            car.ChangeAvailability("rented",currCustomer.Name); // Mark the car as rented
         }
         
 
         public void ReturnCar(int carId)
         {
-            IVehicle? car = this.cars.FirstOrDefault(c => c.Id == carId);
+            IVehicle? car = cars.FirstOrDefault(c => c.Id == carId);
             if (car == null)
             {
                 Console.WriteLine("There is no such car that is rented");
                 return;
             }
-            IRental? rental = this.rentals.FirstOrDefault(r => r.Vehicle.Id == carId);
+            IRental? rental = rentals.FirstOrDefault(r => r.Vehicle.Id == carId);
             DateOnly returnDate = rental.ReturnDate;
             DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
             if (returnDate>currentDate)
             {
                 Console.WriteLine("Succesfully returned car.");
-                car.ChangeAvailability("available"); // Mark the car as available
+                car.ChangeAvailability("available",""); // Mark the car as available
                 return;
             }
             else
             {
                 Console.WriteLine($"You missed the return date. You must pay {HELPERS.Helper.DELAYED_CAR_FINE}lv fine.");
                 Console.WriteLine("Succesfully returned car.");
-                car.ChangeAvailability("available"); // Mark the car as available
+                car.ChangeAvailability("available",""); // Mark the car as available
                 return;
             }
         }
+
+        public IVehicle SearchById(int id)
+        {
+            IVehicle? car = cars.FirstOrDefault(c => c.Id == id);
+            if (car == null)
+            {
+                throw new ArgumentException("No car found with the specified id.");
+            }
+            return car;
+        }
+
+        public IVehicle SearchByModel(string model)
+        {
+            IVehicle? car = cars.FirstOrDefault(c => c.Model == model);
+            if (car == null)
+            {
+                throw new ArgumentException("No car found with the specified model.");
+            }
+            return car;
+
+        }
+
+        public IVehicle SearchByStatus(string status)
+        {
+            IVehicle? car = cars.FirstOrDefault(c => c.Availability == status);
+            if (car == null)
+            {
+                throw new ArgumentException("No car found with the specified status.");
+                
+            }
+            return car;
+        }
+
     }
 }

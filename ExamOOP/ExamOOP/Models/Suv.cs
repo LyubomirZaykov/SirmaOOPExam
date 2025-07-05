@@ -8,10 +8,9 @@ namespace ExamOOP.Models
 {
     public class Suv : Car
     {
-        public Suv(int id, string make, string model, int year, string type, string availability, string currentRenter) : base(id, make, model, year, type, availability, currentRenter)
-        {
-        }
-        public Suv(int id, string make, string model, int year, string type, string availability) : base(id, make, model, year, type, availability)
+        
+        public Suv(int id, string make, string model, int year, string type, string availability, string currentRenter) 
+            : base(id, make, model, year, type, availability, currentRenter)
         {
         }
     }

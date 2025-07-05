@@ -12,10 +12,6 @@ namespace ExamOOP.Models
             : base(id, make, model, year, type, availability, currentRenter)
         {
         }
-        public Truck(int id, string make, string model, int year, string type, string availability)
-            : base(id, make, model, year, type, availability)
-        {
-        }
     }
     
 }
