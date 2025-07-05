@@ -4,7 +4,7 @@ namespace ExamOOP.Models
 {
     public class Customer : ICustomer
     {
-        private string name;
+        private string? name;
         private int id;
 
         public Customer(string name, int id)

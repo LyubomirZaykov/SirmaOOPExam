@@ -9,7 +9,7 @@ namespace ExamOOP.Interfaces
 {
     public interface IRentable //Interface for items (cars) that can be rented
     {
-        void RentCar(int id, DateTime rentalDate, Customer customer);
-        void ReturnCar(int id);
+        void RentCar(string customer, int carId);
+        void ReturnCar(int carId);
     }
 }

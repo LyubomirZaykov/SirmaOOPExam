@@ -9,25 +9,16 @@ using System.Threading.Tasks;
 
 namespace ExamOOP.Models
 {
-    public abstract class Car : IVehicle, IRentable
+    public abstract class Car : IVehicle
     {
         private int id;
-        private string make;
-        private string model;
+        private string? make;
+        private string? model;
         private int year;
-        private string type;
-        private string availability; // Assuming availability is a string that can be "Available" or "Rented"
-        private string currentRenter;
-        public Car(int id, string make, string model, int year, string type, string availability, string currentRenter)
-        {
-            this.Id = id;
-            this.Make = make;
-            this.Model = model;
-            this.Year = year;
-            this.Availability = availability.ToLower();
-            this.CurrentRenter = currentRenter;
+        private string? type;
+        private string? availability; // Assuming availability is a string that can be "Available" or "Rented"
 
-        }
+
         public Car(int id, string make, string model, int year, string type, string availability)
         {
             this.Id = id;
@@ -46,7 +37,7 @@ namespace ExamOOP.Models
 
             private set
             {
-                if (value<=0)
+                if (value <= 0)
                 {
                     throw new ArgumentException("Id cannot be negative.");
                 }
@@ -130,7 +121,7 @@ namespace ExamOOP.Models
                 {
                     throw new ArgumentNullException("Make cannot be null or empty.");
                 }
-                else if (value!="rented" || value != "available")
+                else if (value != "rented" || value != "available")
                 {
                     throw new ArgumentNullException("Availability status must be either rented or available.");
 
@@ -143,7 +134,7 @@ namespace ExamOOP.Models
         }
 
 
-        
+
 
         public string Type
         {
@@ -164,30 +155,6 @@ namespace ExamOOP.Models
             }
         }
 
-        public string CurrentRenter
-        {
-            get
-            {
-                return this.currentRenter;
-            }
-            private set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("Type cannot be null or empty.");
-                }
-                else
-                {
-                    this.currentRenter = value;
-                }
-            }
-        }
-
-
-
-
-
-
         // Assuming true means available, false means rented out and Initially all cars are available.
         public bool IsRented()
         {
@@ -202,26 +169,27 @@ namespace ExamOOP.Models
         }
         public void DisplayInfo()
         {
-            bool isRented = this.IsRented();
-            if (isRented)
-            {
-            Console.WriteLine($"{Id}: {Year} {Make} {Model} - {this.GetType().ToString()} - {Availability} - {CurrentRenter}");
 
-            }
-            else
-            {
-                Console.WriteLine($"{Id}: {Year} {Make} {Model} - {this.GetType().ToString()} - {Availability}");
-            }
+            Console.WriteLine($"{Id}: {Year} {Make} {Model} - {this.GetType().ToString()} - {Availability}");
+
         }
 
-        public void RentCar(int id, DateTime rentalDate, Customer customer)
+        public void ChangeAvailability(string availability)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(availability) || (availability != "available" && availability != "rented"))
+            {
+                throw new ArgumentException("Availability must be either 'available' or 'rented'.");
+            }
+            this.Availability = availability.ToLower();
         }
-
-        public void ReturnCar(int id)
+        public void ActualizeCar(string? make, string? model, int year, string? type, string? availability)
         {
-            throw new NotImplementedException();
+            this.Make = make;
+            this.Model = model;
+            this.Year = year;
+            this.Type = type;
+            this.Availability = availability.ToLower();
         }
+        
     }
 }
