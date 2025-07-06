@@ -23,9 +23,9 @@ namespace CarRentalSystem.Services
             {
                 reader.ReadLine(); // skip header
                 string? line;
-                while ((line = reader.ReadLine()) != null)
+                while (!string.IsNullOrEmpty(line = reader.ReadLine()))
                 {
-                    string[] parts = line.Split(';').ToArray();
+                    string[] parts = line.Split(',').ToArray();
                     IVehicle vehicle = vehicleGenerator.GenerateVehicle(parts);
                     cars.Add(vehicle);
                 }

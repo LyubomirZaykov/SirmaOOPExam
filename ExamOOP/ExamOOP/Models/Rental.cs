@@ -7,14 +7,15 @@ namespace ExamOOP.Models
     {
         private IVehicle vehicle;
         private ICustomer customer;
-        private DateOnly rentalDate;
-        private DateOnly returnDate;
-        public Rental(IVehicle vehicle, ICustomer customer,DateOnly rentalDate, DateOnly returnDate)
+        //private DateOnly rentalDate;
+        //private DateOnly returnDate;
+        //public Rental(IVehicle vehicle, ICustomer customer,DateOnly rentalDate, DateOnly returnDate)
+        public Rental(IVehicle vehicle, ICustomer customer)
         {
             this.Vehicle = vehicle;
             this.Customer = customer;
-            this.RentalDate = rentalDate;
-            this.ReturnDate = returnDate;
+            //this.RentalDate = rentalDate;
+            //this.ReturnDate = returnDate;
         }
 
         public ICustomer Customer
@@ -33,31 +34,31 @@ namespace ExamOOP.Models
             }
         }
 
-        public DateOnly RentalDate
-        {
-            get
-            {
-                return this.rentalDate;
-            }
-            set
-            {
+        //public DateOnly RentalDate
+        //{
+        //    get
+        //    {
+        //        return this.rentalDate;
+        //    }
+        //    set
+        //    {
               
-                this.rentalDate = value;
-            }
-        }
+        //        this.rentalDate = value;
+        //    }
+        //}
 
-        public DateOnly ReturnDate
-        {
-            get
-            {
-                return this.returnDate;
-            }
-            set
-            {
+        //public DateOnly ReturnDate
+        //{
+        //    get
+        //    {
+        //        return this.returnDate;
+        //    }
+        //    set
+        //    {
                 
-                this.returnDate = value;
-            }
-        }
+        //        this.returnDate = value;
+        //    }
+        //}
 
         public IVehicle Vehicle
         {

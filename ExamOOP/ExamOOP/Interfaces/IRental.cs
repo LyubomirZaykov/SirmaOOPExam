@@ -8,9 +8,7 @@ namespace ExamOOP.Interfaces
         
         IVehicle Vehicle { get;}
         ICustomer Customer { get;}
-        DateOnly RentalDate { get;}
-        DateOnly ReturnDate { get; }
-
-
+       // DateOnly RentalDate { get;}
+       // DateOnly ReturnDate { get; }
     }
 }

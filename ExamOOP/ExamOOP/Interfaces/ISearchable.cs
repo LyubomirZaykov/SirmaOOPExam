@@ -6,7 +6,7 @@ namespace ExamOOP.Interfaces
     public  interface ISearchable
     {
         IVehicle SearchById(int id);  //Interface for searching cars by various criteria
-        IVehicle SearchByModel(string model);
-        IVehicle SearchByStatus(string status);
+        List<IVehicle> SearchByModel(string model);
+        List<IVehicle> SearchByStatus(string status);
     }
 }

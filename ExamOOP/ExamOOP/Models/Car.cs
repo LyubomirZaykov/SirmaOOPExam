@@ -27,13 +27,14 @@ namespace ExamOOP.Models
             this.Model = model;
             this.Year = year;
             this.Availability = availability.ToLower();
-            if (currentRenter!=null)
+            this.Type = type.ToLower(); // Assuming Type is a string that can be "Hatchback", "Truck", "SUV", "Sedan", or "Van"
+            if (!string.IsNullOrEmpty(currentRenter))
             {
                 this.CurrentRenter = currentRenter;
             }
 
         }
-        public int Id
+        public int Id // I am not sure what we mean by that, but I Assume it is unique 4-digit number for each car.
         {
             get
             {
@@ -149,14 +150,7 @@ namespace ExamOOP.Models
             }
             private set
             {
-                if (string.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentNullException("Type cannot be null or empty.");
-                }
-                else
-                {
-                    this.type = value;
-                }
+                this.type=this.GetType().Name;
             }
         }
         public string CurrentRenter
@@ -184,31 +178,45 @@ namespace ExamOOP.Models
         }
         public void DisplayInfo()
         {
+            if (string.IsNullOrEmpty(currentRenter))
+            {
+                Console.WriteLine($"{Id}: {Year} {Make} {Model} - {Type} - {Availability}");
+            }
+            else
+            {
+                Console.WriteLine($"{Id}: {Year} {Make} {Model} - {Type} - {Availability} - {currentRenter}");
 
-            Console.WriteLine($"{Id}: {Year} {Make} {Model} - {this.GetType().ToString()} - {Availability}");
+            }
 
         }
 
         public void ChangeAvailability(string availability, string currentRenterName)
         {
-            if (this.availability == "rented")
-            {
-                this.CurrentRenter = currentRenterName;
-            }
+            
             if (string.IsNullOrEmpty(availability) || (availability != "available" && availability != "rented"))
             {
                 throw new ArgumentException("Availability must be either 'available' or 'rented'.");
             }
             this.Availability = availability.ToLower();
+            if (this.availability == "rented")
+            {
+                this.CurrentRenter = currentRenterName;
+            }
+            else
+            {
+                this.CurrentRenter = "";
+            }
         }
-        public void ActualizeCar(string? make, string? model, int year, string? type, string? availability)
+        public void ActualizeCar(string? make, string? model, int year, string? type)
         {
             this.Make = make;
             this.Model = model;
             this.Year = year;
             this.Type = type;
-            this.Availability = availability.ToLower();
         }
-
+        public override string ToString()
+        {
+            return $"{Id},{Make},{Model},{Year},{Type},{Availability},{CurrentRenter}";
+        }
     }
 }

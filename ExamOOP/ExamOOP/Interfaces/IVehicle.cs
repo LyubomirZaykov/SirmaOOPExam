@@ -16,8 +16,9 @@ namespace ExamOOP.Interfaces
         string Availability { get;}
         string CurrentRenter { get;}
         void DisplayInfo();
-        void ActualizeCar(string? make, string? model, int year, string? type, string? availability);
+        void ActualizeCar(string? make, string? model, int year, string? type);
         void ChangeAvailability(string availability, string currentRenterName);
+
 
     }
 }

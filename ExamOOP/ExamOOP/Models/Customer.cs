@@ -4,13 +4,14 @@ namespace ExamOOP.Models
 {
     public class Customer : ICustomer
     {
+        private static int nextId = 1;
         private string? name;
         private int id;
 
-        public Customer(string name, int id)
+        public Customer(string name)
         {
             this.Name = name;
-            this.Id = id;
+            this.Id = nextId++;
         }
         public string Name
         {

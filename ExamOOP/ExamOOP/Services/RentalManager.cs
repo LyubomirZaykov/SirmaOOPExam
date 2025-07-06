@@ -1,5 +1,6 @@
 ﻿using ExamOOP.Interfaces;
 using ExamOOP.Models;
+using System.Reflection;
 
 namespace ExamOOP.Services
 {
@@ -47,24 +48,20 @@ namespace ExamOOP.Services
             int year = int.Parse(Console.ReadLine() ?? "0");
             Console.WriteLine("4. Please enter the Type");
             string? type = Console.ReadLine();
-            Console.WriteLine("5. Please enter the Availability");
-            string? availability = Console.ReadLine();
-            Console.WriteLine("6. Please enter the Current Renter");
-            string? currentRenter = Console.ReadLine(); 
-            currCar.ActualizeCar(make, model, year, type, availability);
+
+            currCar.ActualizeCar(make, model, year, type);
 
         }
         public List<IVehicle> ListCars()
         {
             if (cars.Count == 0)
             {
-                Console.WriteLine("No cars available."); 
+                Console.WriteLine("No cars available.");
             }
             return cars;
         }
-        public void RentCar(string customer,int carId)
+        public void RentCar(string customer, int carId)
         {
-            Console.WriteLine("Please enter the ID of the car you want to rent:");
             IVehicle? car = cars.FirstOrDefault(c => c.Id == carId);
             if (car == null)
             {
@@ -78,27 +75,22 @@ namespace ExamOOP.Services
                 Console.WriteLine("Please choose another car");
                 return;
             }
-            Console.WriteLine("Please enter your name:");
-          
+
             ICustomer? currCustomer = customers.FirstOrDefault(c => c.Name == customer);
-            if (customer == null)
+            if (currCustomer == null)
             {
-                Console.WriteLine("Customer not found. Please register first.");
-                Console.WriteLine("Please enter customer name:");
-                string customerName = Console.ReadLine() ?? string.Empty;
-                Console.WriteLine("Please enter customer Id:");
-                int customerId = int.Parse(Console.ReadLine());
-                currCustomer = new Customer(customerName, customerId);
+                currCustomer = new Customer(customer);
                 customers.Add(currCustomer);
             }
-            DateOnly rentalDate = DateOnly.FromDateTime(DateTime.Now);
-            DateOnly returnDate = rentalDate.AddDays(7); // Assuming a 7-day rental period
-            IRental rental= new Rental(car, currCustomer,rentalDate,returnDate);
+            //DateOnly rentalDate = DateOnly.FromDateTime(DateTime.Now);
+            //DateOnly returnDate = rentalDate.AddDays(7); // Assuming a 7-day rental period
+
+            IRental rental = new Rental(car, currCustomer);
             rentals.Add(rental);
             Console.WriteLine($"Car {car.Make} {car.Model} rented to {currCustomer.Name}.");
-            car.ChangeAvailability("rented",currCustomer.Name); // Mark the car as rented
+            car.ChangeAvailability("rented", customer); // Mark the car as rented
         }
-        
+
 
         public void ReturnCar(int carId)
         {
@@ -109,54 +101,62 @@ namespace ExamOOP.Services
                 return;
             }
             IRental? rental = rentals.FirstOrDefault(r => r.Vehicle.Id == carId);
-            DateOnly returnDate = rental.ReturnDate;
-            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now);
-            if (returnDate>currentDate)
-            {
-                Console.WriteLine("Succesfully returned car.");
-                car.ChangeAvailability("available",""); // Mark the car as available
-                return;
-            }
-            else
-            {
-                Console.WriteLine($"You missed the return date. You must pay {HELPERS.Helper.DELAYED_CAR_FINE}lv fine.");
-                Console.WriteLine("Succesfully returned car.");
-                car.ChangeAvailability("available",""); // Mark the car as available
-                return;
-            }
+            //DateOnly returnDate = rental.ReturnDate; //This  cause problems if we have rented car in the beginning, which are read from  to .csv file, which don't have return date and dont exist in current rentals.
+            //DateOnly currentDate = DateOnly.FromDateTime(DateTime.Now); //I can solve it by saving rentals also in .csv file and initally all the cars to be available, but I don't want to complicate the code too much for the moment. I will comment
+            rentals.Remove(rental);
+            Console.WriteLine("Succesfully returned car.");
+            car.ChangeAvailability("available", "");
+            // Remove the rental record
+            //if (returnDate>currentDate)
+            //{
+            //    Console.WriteLine("Succesfully returned car.");
+            //    car.ChangeAvailability("available",""); // Mark the car as available
+            //    return;
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"You missed the return date. You must pay {HELPERS.Helper.DELAYED_CAR_FINE}lv fine.");
+            //    Console.WriteLine("Succesfully returned car.");
+
+            //    car.ChangeAvailability("available",""); // Mark the car as available
+            //    return;
+            //}
         }
 
         public IVehicle SearchById(int id)
         {
             IVehicle? car = cars.FirstOrDefault(c => c.Id == id);
-            if (car == null)
-            {
-                throw new ArgumentException("No car found with the specified id.");
-            }
+
             return car;
         }
 
-        public IVehicle SearchByModel(string model)
+        public List<IVehicle> SearchByModel(string model)
         {
-            IVehicle? car = cars.FirstOrDefault(c => c.Model == model);
-            if (car == null)
-            {
-                throw new ArgumentException("No car found with the specified model.");
-            }
-            return car;
+            List<IVehicle> vehicles = cars.Where(v=>v.Model==model).ToList();
+
+            return vehicles;
 
         }
 
-        public IVehicle SearchByStatus(string status)
+        public List<IVehicle> SearchByStatus(string status)
         {
-            IVehicle? car = cars.FirstOrDefault(c => c.Availability == status);
-            if (car == null)
-            {
-                throw new ArgumentException("No car found with the specified status.");
-                
-            }
-            return car;
+            List<IVehicle> vehicles = cars.Where(v => v.Availability == status).ToList();
+
+            return vehicles;
         }
 
+        public void RemoveCar(int id)
+        {
+            IVehicle? car = cars.FirstOrDefault(c => c.Id == id);
+            if (car != null)
+            {
+                cars.Remove(cars.FirstOrDefault(c => c.Id == id));
+                Console.WriteLine($"Successfully removed car with ID: {id}");
+            }
+            else
+            {
+                Console.WriteLine($"Car with ID: {id} not found.");
+            }
+        }
     }
 }
