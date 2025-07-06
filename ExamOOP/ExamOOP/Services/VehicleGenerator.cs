@@ -19,7 +19,20 @@ namespace ExamOOP.Services
             int year = int.Parse(tokens[3]);
             string type = tokens[4];
             string availability = tokens[5].ToLower();
-            string currentRenter = tokens.Length > 6 ? tokens[6] : "";
+            string currentRenter = "";
+            if (availability == "available")
+            {
+                currentRenter = "";
+            }
+            else
+            {
+                if (tokens.Length < 7)
+                {
+                    throw new ArgumentException("Current renter cannot be empty when the vehicle is not available.");
+                }
+                currentRenter = tokens[6];
+                
+            }
 
             switch (type.ToLower())
             {

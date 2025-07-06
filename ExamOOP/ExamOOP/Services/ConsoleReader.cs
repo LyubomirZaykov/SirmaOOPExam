@@ -26,6 +26,7 @@ namespace ExamOOP.Services
                         Console.WriteLine("Enter: ID,Make,Model,Year,Type, Availability, Renter(if rented)");
                         string[] values = Console.ReadLine().Split(',').ToArray();
                         IVehicle vehicle = vehicleGenerator.GenerateVehicle(values);
+
                         manager.AddCar(vehicle);
                         break;
 
